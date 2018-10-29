@@ -1,0 +1,9 @@
+version: '2'
+services:
+  app:
+    build: './build/ubuntu'
+    tty: true
+    volumes:
+      - './volumes/ubuntu:/home/usagi/mount'
+
+  
