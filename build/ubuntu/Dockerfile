@@ -17,7 +17,7 @@ USER usagi
 WORKDIR /home/usagi
 
 #install tools
-RUN sudo apt-get install -y openjdk-8-jdk wget gnupg git mecab libmecab-dev mecab-ipadic-utf8 make curl xz-utils file
+RUN sudo apt-get install -y openjdk-11-jdk wget gnupg git mecab libmecab-dev mecab-ipadic-utf8 make curl xz-utils file npm
 
 #install neologd
 ADD NEologd.sh /home/usagi/NEologd.sh
@@ -34,7 +34,19 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E4
 RUN sudo apt-get update
 RUN sudo apt-get install -y sbt
 
+#install skmt-lib
+ADD local /home/usagi/.ivy2/local
+
 #git clone
 RUN sudo git clone https://github.com/JotaroAbe/CurationmapGenerator.git
 
-WORKDIR CurationmapGenerator
+#change chown
+RUN sudo chown -R usagi:developer ~/
+
+#compile typescripts
+WORKDIR /home/usagi/CurationmapGenerator/public/javascripts
+RUN npm install
+RUN npm run build
+
+#move cd
+WORKDIR /home/usagi/CurationmapGenerator

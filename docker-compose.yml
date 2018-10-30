@@ -1,9 +1,38 @@
 version: '2'
 services:
   app:
-    build: './build/ubuntu'
+    build: "./build/ubuntu"
+    links:
+      - mongo
     tty: true
     volumes:
-      - './volumes/ubuntu:/home/usagi/mount'
+      - "./volumes/ubuntu:/home/usagi/mount"
+    ports:
+      - "9000:9000"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.2
 
+  mongo:
+    container_name: mongo
+    build: "./build/mongo"
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./volumes/mongo/data:/data/db
+      - ./volumes//mongo/init/:/docker-entrypoint-initdb.d/
+    environment:
+    - MONGO_INITDB_DATABASE=curationmap
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.3
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.16.238.0/24
+         gateway: 172.16.238.1
   
