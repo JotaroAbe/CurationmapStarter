@@ -48,5 +48,8 @@ WORKDIR /home/usagi/CurationmapGenerator/public/javascripts
 RUN npm install
 RUN npm run build
 
+#sbt compile
+RUN sbt compile
+
 #move cd
 WORKDIR /home/usagi/CurationmapGenerator
