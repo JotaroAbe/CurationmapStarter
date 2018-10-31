@@ -1,14 +1,14 @@
 version: '2'
 services:
   app:
-    build: "./build/ubuntu"
+    build: "./build/webapp"
     links:
       - mongo
     tty: true
     volumes:
-      - "./volumes/ubuntu:/home/usagi/mount"
+      - "./volumes/webapp:/home/usagi/mount"
     ports:
-      - "9000:9000"
+      - "80:9000"
     networks:
       app_net:
         ipv4_address: 172.16.238.2
@@ -26,6 +26,17 @@ services:
     networks:
       app_net:
         ipv4_address: 172.16.238.3
+
+  factory:
+    build: "./build/factory"
+    links:
+      - mongo
+    tty: true
+    volumes:
+      - "./volumes/factory:/home/usagi/mount"
+    networks:
+      app_net:
+        ipv4_address: 172.16.238.4
 
 networks:
   app_net:
