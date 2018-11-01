@@ -26,18 +26,18 @@ RUN sudo apt-get update
 RUN sudo apt-get install -y sbt
 
 #git clone
-RUN sudo git clone --recursive https://github.com/JotaroAbe/CurationmapGenerator.git
+RUN sudo git clone --recursive https://github.com/JotaroAbe/CurationmapViewer.git
 
 #change chown
 RUN sudo chown -R usagi:developer ~/
 
 #compile typescripts
-WORKDIR /home/usagi/CurationmapGenerator/public/javascripts
+WORKDIR /home/usagi/CurationmapViewer/public/javascripts
 RUN npm install
 RUN npm run build
 
 #move cd
-WORKDIR /home/usagi/CurationmapGenerator
+WORKDIR /home/usagi/CurationmapViewer
 
 #loadSbtDep
 RUN sbt compile
