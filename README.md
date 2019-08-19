@@ -16,7 +16,7 @@ dockerグループに自分のユーザを追加して再起動
 
 ```shell
 sudo groupadd docker
-sudo usermod -g docker vagrant
+sudo usermod -g docker yourusername
 sudo /bin/systemctl restart docker.service
 
 sudo reboot
