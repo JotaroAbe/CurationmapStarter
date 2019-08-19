@@ -25,22 +25,13 @@ RUN sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E4
 RUN sudo apt-get update
 RUN sudo apt-get install -y sbt
 
-#git clone
-RUN sudo git clone --recursive https://github.com/JotaroAbe/CurationmapViewer.git
 
 #change chown
 RUN sudo chown -R usagi:developer ~/
 
-#compile typescripts
-WORKDIR /home/usagi/CurationmapViewer/public/javascripts
-RUN npm install
-RUN npm run build
-
 #move cd
 WORKDIR /home/usagi/CurationmapViewer
 
-#loadSbtDep
-RUN sbt compile
 
 #language jp
 RUN sudo apt-get -y install language-pack-ja-base language-pack-ja

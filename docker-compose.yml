@@ -6,7 +6,7 @@ services:
       - mongo
     tty: true
     volumes:
-      - "./volumes/webapp:/home/usagi/mount"
+      - "./volumes/webapp:/home/usagi"
     ports:
       - "80:9000"
     networks:
@@ -33,7 +33,7 @@ services:
       - mongo
     tty: true
     volumes:
-      - "./volumes/factory:/home/usagi/mount"
+      - "./volumes/factory:/home/usagi"
     networks:
       app_net:
         ipv4_address: 172.16.238.4
